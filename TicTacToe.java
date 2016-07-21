@@ -31,10 +31,29 @@ public class TicTacToe
         }
     }
     
+    public static boolean symbolIsRepeatedHorizontally
+        (char[][] board, char symbol){
+            boolean symbolIsRepeated = false;
+            for (int row = 0; row < 3; row++) {
+                int symbolCount = 0;
+                for (int col = 0; col < 3; col++) {
+                    if (board[row][col] == symbol) {
+                        symbolCount = symbolCount + 1;
+                    }
+                }
+                if (symbolCount == 3) {
+                    symbolIsRepeated = true;
+                }
+            }
+            return symbolIsRepeated;
+    }
+    
     // method stub
-    public boolean isGameOver()
+    public boolean isGameOver(char symbol)
     {
-        return false;
+        boolean repeatedHorizontally = 
+            symbolIsRepeatedHorizontally(theBoard, symbol);
+        return repeatedHorizontally;
     }
     
     public void takeTurn(char player)
@@ -59,14 +78,14 @@ public class TicTacToe
             takeTurn('X');
             printBoard();
             
-            if (isGameOver()) {
+            if (isGameOver('X')) {
                 break;
             }
 
             takeTurn('O');
             printBoard();
             
-            if (isGameOver()) {
+            if (isGameOver('O')) {
                 break;
             }
         }
